@@ -8,7 +8,8 @@ class User {
     #createdAt
     #role
 
-    constructor(username, password, email, id) {
+    constructor({username, password, email, id, role}) {
+        console.log("constructor params: ", { username, password, email, role})
         this.#username = username;
         this.#password = password;
         this.#id = id;

@@ -1,11 +1,11 @@
 function UserController(registerUserUseCase, getUserProfileUseCase, loginUserUseCase) {
     return {
         async register(req, res) {
-            const { username, password, email } = req.body;
+            const { username, password, email, role } = req.body;
 
             try {
-                const user = await registerUserUseCase.execute(username, password, email);
-                res.status(201).json({ id: user.id, username: user.username, email: user.email, createdAt: user.createdAt });
+                const user = await registerUserUseCase.execute({username, password, email, role});
+                res.status(201).json({ id: user.id, username: user.username, email: user.email, role: user.role, createdAt: user.createdAt });
             } catch (error) {
                 res.status(400).json({ error: error.message });
             }

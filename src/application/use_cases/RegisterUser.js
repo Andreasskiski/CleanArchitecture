@@ -5,7 +5,7 @@ class RegisterUser {
         this.userRepository = userRepository;
     }
 
-    async execute(username, password, email, role) {
+    async execute({username, password, email, role}) {
 
         //Runst findByUserName to check if user already exists
         const existing = await this.userRepository.findByUsername(username);
@@ -13,7 +13,7 @@ class RegisterUser {
 
 
         //Create user and save the user
-        const user = new User(username, password, email, role);
+        const user = new User({username, password, email, role});
         await this.userRepository.save(user);
         
 

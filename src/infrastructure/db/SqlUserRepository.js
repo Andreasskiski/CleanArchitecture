@@ -17,14 +17,19 @@ class InMemoryUserRepository extends IUserRepository {
         const hashedPassword = await bcrypt.hash(user.password, 10);
 
         // Create a new User object
-        const userObj = new User(user.username, hashedPassword, user.email);
+        const userObj = new User({
+            username: user.username,
+            password: hashedPassword,
+            email: user.email,
+            role: user.role,
+        });
         console.log("User created:", userObj.profile);
 
 
         const connection = await pool.getConnection();
         console.log(userObj.username, userObj.password, userObj.email);
         const query = "INSERT INTO users (username, password, email, createdAt, role) VALUES (?, ?, ?, ?, ?)";
-        const values = [userObj.username, userObj.password, userObj.email, userObj.createdAt, userObj.role];
+        const values = [userObj.username, userObj.password, userObj.email,userObj.createdAt, userObj.role ];
         await connection.execute(query, values);
         connection.release();
 
