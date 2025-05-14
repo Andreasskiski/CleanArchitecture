@@ -6,20 +6,20 @@ class User {
     #username
     #email
     #createdAt
+    #role
 
-    constructor(username, password, email) {
+    constructor(username, password, email, id) {
         this.#username = username;
         this.#password = password;
+        this.#id = id;
+        this.#role = role;
+
 
         //checks if email is valid/contains @
         if (!email.includes("@")) {
             throw new Error("Invalid email/does not contain @");
         }
         this.#email = email;
-
-        //Generate random id
-        this.#id = Math.random().toString(36).substring(2, 9);
-
 
         this.#createdAt = new Date();
     }
@@ -30,7 +30,8 @@ class User {
             username: this.#username,
             password: this.#password,
             email: this.#email,
-            createdAt: this.#createdAt
+            createdAt: this.#createdAt,
+            role: this.#role
         }
     }
 
@@ -52,6 +53,10 @@ class User {
 
     get createdAt() {
         return this.#createdAt;
+    }
+
+    get role() {
+        return this.#role;
     }
 
     

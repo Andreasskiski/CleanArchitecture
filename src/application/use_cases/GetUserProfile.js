@@ -7,9 +7,8 @@ class GetUserProfile {
         const user = await this.userRepository.findByUsername(username);
         if (!user) throw new Error("User not found.");
         return {
-            id: user.id,
+            id: user.userID,
             username: user.username,
-            password: user.password,
             email: user.email,
             createdAt: user.createdAt
         }
